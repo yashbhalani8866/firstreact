@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { Component } from 'react';
 
 const medechine = [
     {
@@ -59,34 +59,91 @@ const medechine = [
     }
 ]
 
-function Medechines(props) {
+const Loading = () =>
+    <div className="loading">
+        <div></div>
+        <div></div>
+    </div>
 
-    const [medechines, setMedechines] = useState(medechine);
+class Medechines extends Component {
 
-    return (
-        <table border='1'>
-            <tr>
-                <th>ID</th>
-                <th>NAME</th>
-                <th>PRICE</th>
-                <th>EXPIRY</th>
-                <th>DESCRIPTION</th>
-            </tr>
+    state = {
+        loading: true,
+    };
 
-            {medechine.map((v, i) => {
-                return (
-                    <tr>
-                        <td>{v.id}</td>
-                        <td>{v.name}</td>
-                        <td>{v.price}</td>
-                        <td>{v.expiry}</td>
-                        <td>{v.desc}</td>
-                    </tr>
-                );
-            })}
-            
-        </table>
-    );
+    componentDidMount() {
+        this.isLoading = setTimeout(() => { this.setState({ loading: false }) }, 2000);
+    }
+
+    componentWillUnmount() {
+        clearTimeout(this.isLoading);
+    }
+
+    timer = () => setTimeout(() => {
+        this.setState({ loading: false })
+    }, 2000);
+
+    render() {
+        const { loading } = this.state;
+        return (
+            loading ? (<Loading />)
+                : (<div className="content">
+                    <table border='1'>
+                        <tr>
+                            <th>ID</th>
+                            <th>NAME</th>
+                            <th>PRICE</th>
+                            <th>EXPIRY</th>
+                            <th>DESCRIPTION</th>
+                        </tr>
+
+                        {medechine.map((v, i) => {
+                            return (
+                                <tr>
+                                    <td>{v.id}</td>
+                                    <td>{v.name}</td>
+                                    <td>{v.price}</td>
+                                    <td>{v.expiry}</td>
+                                    <td>{v.desc}</td>
+                                </tr>
+                            );
+                        })}
+
+                    </table>
+                </div>)
+        );
+    }
 }
 
 export default Medechines;
+
+// function Medechines(props) {
+
+//     const [medechines, setMedechines] = useState(medechine);
+
+//     return (
+//         <table border='1'>
+//             <tr>
+//                 <th>ID</th>
+//                 <th>NAME</th>
+//                 <th>PRICE</th>
+//                 <th>EXPIRY</th>
+//                 <th>DESCRIPTION</th>
+//             </tr>
+
+//             {medechine.map((v, i) => {
+//                 return (
+//                     <tr>
+//                         <td>{v.id}</td>
+//                         <td>{v.name}</td>
+//                         <td>{v.price}</td>
+//                         <td>{v.expiry}</td>
+//                         <td>{v.desc}</td>
+//                     </tr>
+//                 );
+//             })}
+
+//         </table>
+//     );
+// }
+
