@@ -1,10 +1,14 @@
+import ProductFun from "./ProductFun";
 import Medechines from "./containers/Medechines";
+import Product from "./containers/Product";
 
 
 function App() {
   return (
     <>
-    <Medechines />
+    {/* <Medechines /> */}
+    {/* <Product /> */}
+    <ProductFun />
     </>
   );
 }
