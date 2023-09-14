@@ -3,46 +3,49 @@ import React, { useEffect, useState } from 'react';
 function Product(props) {
 
     const [product, setProduct] = useState([])
+    const [search,setSearch] = useState('');
+    const [filterData,setFilterData] = useState('');
 
 
     const getData = async () => {
-        const response = await fetch("https://fakestoreapi.com/products");
+        const response = await fetch("https://type.fit/api/quotes");
 
         const data = await response.json();
         setProduct(data)
         console.log(data);
     }
 
-
     useEffect(() => {
         getData();
     }, [])
 
+    const handleSearch = (value) => {
+        setSearch(value);
+        let Fdata = product.filter((v) => 
+        v.text.toLowerCase().includes(value.toLowerCase()) ||
+        v.author.toLowerCase().includes(value.toLowerCase())   
+        ) 
+        setFilterData(Fdata)
+    }
+
+    const FinalData = setFilterData.length > 0 ? filterData : product ;
+
     return (
-
-
-        <div className='wrap'>
-
-
-
-            {product.map((v, i) => {
+        <>
+        <input placeholder='search' style={{width: "500px",height: "50px"}} onChange={(event) => handleSearch(event.target.value)}/>
+        <div className='row'>
+            
+            {FinalData.map((v, i) => {
                 return (
-                    <div class="box">
-                        <div class="box-top">
-                            <h4>{v.category}</h4><br></br>
-                            <img class="box-image" src={v.image}></img>
-                            <div class="title-flex">
-                                <h4 class="box-title">{v.title}</h4>
-                                <p class="user-follow-info">Rating {v.rating.rate}</p>
-                            </div>
-                            <p class="description">{v.description}</p>
+                        <div className="col-md-4" style={{width: "300px",height: "150px"}}>
+                            <h4>{v.text}</h4>
+                            <p>{v.author}</p>
                         </div>
-                        <a href="#" class="button">$ {v.price}</a>
-                    </div>
-
                 );
             })}
         </div>
+
+        </>
     );
 }
 
