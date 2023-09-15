@@ -1,6 +1,8 @@
 import ProductFun from "./ProductFun";
 import Medechines from "./containers/Medechines";
+import NewProduct from "./containers/NewProduct";
 import Product from "./containers/Product";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 function App() {
@@ -8,7 +10,7 @@ function App() {
     <>
     {/* <Medechines /> */}
     {/* <Product /> */}
-    <ProductFun />
+    <NewProduct />
     </>
   );
 }

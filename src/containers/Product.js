@@ -44,7 +44,7 @@ function Product(props) {
                 );
             })}
         </div>
-
+        
         </>
     );
 }

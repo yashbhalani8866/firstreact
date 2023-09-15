@@ -79,10 +79,6 @@ class Medechines extends Component {
         clearTimeout(this.isLoading);
     }
 
-    timer = () => setTimeout(() => {
-        this.setState({ loading: false })
-    }, 2000);
-
     render() {
         const { loading } = this.state;
         return (
