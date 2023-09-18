@@ -5,17 +5,20 @@ function NewProduct(props) {
     const [product, setProduct] = useState([]);
     const [search,setSearch] = useState('');
     const [filterData,setFilterData] = useState('');
+    const [category,setCategory] = useState([]);
+
 
     const getData = async () => {
         const response = await fetch("https://dummyjson.com/products")
 
         const data = await response.json();
-        console.log(data);
+
+        
 
         setProduct(data.products);
 
     }
-
+    console.log(category);
     useEffect(() => {
         getData();
     }, [])
@@ -25,24 +28,29 @@ function NewProduct(props) {
         let Fdata = product.filter((v) => 
             v.category.toLowerCase().includes(value.toLowerCase())
             )
-            console.log(Fdata);
         setFilterData(Fdata);
+
 
     }
 
     const FinalData = filterData.length > 0 ? filterData : product ;
-    console.log(FinalData);
+
 
 
     return (
         <>
             <button onClick={() => handleSearch('smartphones')}>smartphones</button>
-            <button onClick={() => handleSearch('laptops')}>laptops</button>
-            <button onClick={() => handleSearch('fragrances')}>fragrances</button>
-            <button onClick={() => handleSearch('skincare')}>skincare</button>
-            <button onClick={() => handleSearch('groceries')}>groceries</button>
-            <button onClick={() => handleSearch('home-decoration')}>home-decoration</button>
-            <button onClick={() => handleSearch('')}>All</button>
+            <button onClick={() => handleSearch('laptops')} >laptops</button>
+            <button onClick={() => handleSearch('fragrances')} >fragrances</button>
+            <button onClick={() => handleSearch('skincare')} >skincare</button>
+            <button onClick={() => handleSearch('groceries')} >groceries</button>
+            <button onClick={() => handleSearch('home-decoration')} >home-decoration</button>
+            <button onClick={() => handleSearch('')} >All</button>
+{/* 
+            <div>
+                
+            </div> */}
+
             <div className='row'>
                 {FinalData.map((v) => {
                     return (
