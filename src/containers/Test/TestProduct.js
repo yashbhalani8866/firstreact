@@ -1,5 +1,6 @@
 import React, { Children } from 'react';
 import { Desc, Heading4, LinkTag, MainDiv, Title } from './AllProduct.style';
+import AllProduct from './AllProduct';
 
 function TestProduct(props) {
 
@@ -165,13 +166,11 @@ function TestProduct(props) {
             <div className='row'>
             {Product.map((v) => {
                 return(
-                    <MainDiv className='col-md-3'>
-                        <Title> {v.name}</Title>
-                        <Desc>{v.description}</Desc>
-                        <LinkTag href='#'>{v.url}</LinkTag>
-                        <Heading4>Price:  {v.price}</Heading4>
-                        <Heading4>{v.category}</Heading4>
-                    </MainDiv>
+                  <div>
+                    <AllProduct>
+                        
+                    </AllProduct>
+                  </div>
                 );
             })}
         </div>
